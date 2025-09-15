@@ -1,5 +1,5 @@
 import 'zone.js/testing';
-import { getTestBed } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-browser/testing';
 
 (window as any).$ = {
@@ -18,7 +18,12 @@ import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-
   }
 };
 
+beforeAll(() => {
+  TestBed.configureTestingModule({});
+});
+
 getTestBed().initTestEnvironment(
   BrowserTestingModule,
-  platformBrowserTesting()
+  platformBrowserTesting(),
+  { teardown: { destroyAfterEach: false } }
 );
