@@ -3,10 +3,9 @@ import { FlatCompat } from '@eslint/eslintrc';
 const compat = new FlatCompat();
 
 export default [
-  ...compat.extends('plugin:@angular-eslint/recommended'),
+  ...compat.extends('plugin:@angular-eslint/recommended', 'plugin:@angular-eslint/template/process-inline-templates'),
   {
-    files: ['**/*.ts'],
-    ignores: ['**/*.component.ts'],
+    files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
       parserOptions: {
         project: ['tsconfig.json'],
@@ -21,30 +20,12 @@ export default [
       '@angular-eslint/component-selector': [
         'error',
         { type: 'element', prefix: 'app', style: 'kebab-case' },
-      ],
+      ]
     },
   },
-  {
-    files: ['**/*.component.ts'],
-    languageOptions: {
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        project: ['tsconfig.json'],
-        createDefaultProgram: true,
-      },
-    },
-    extends: [
-      'plugin:@angular-eslint/template/process-inline-templates',
-    ],
-  },
+  ...compat.extends('plugin:@angular-eslint/template/recommended'),
   {
     files: ['**/*.html'],
-    languageOptions: {
-      parser: '@angular-eslint/template-parser',
-    },
-    extends: [
-      'plugin:@angular-eslint/template/recommended',
-    ],
     rules: {},
   },
   {
